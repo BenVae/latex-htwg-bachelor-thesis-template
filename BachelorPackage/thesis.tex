@@ -1,0 +1,59 @@
+\documentclass[
+		11pt,
+		a4paper,
+		toc=listof, %% Abbildungs- und Tabellenverzeichnis mit ins Inhaltsverzeichnis
+		bibliography=totoc %% Quellenverzeichnis mit ins Inhaltsverzeichnis
+		]{scrreprt}	 %% KOMA Script
+
+\input{preamble/packete}
+\input{preamble/optionen}
+\input{preamble/variablen}
+\input{preamble/highlighting}
+
+
+\begin{document}
+%% Nummerierung aus
+\pagenumbering{gobble}
+
+% HTWG Tempaltes fuer Titelseite etc.
+\include{htwg/cover}
+\include{htwg/title}
+\include{htwg/abstract}
+
+\pagenumbering{Roman}
+\include{htwg/affidavit}
+
+\tableofcontents
+
+\input{acronym}
+
+\newcounter{prepend}
+\setcounter{prepend}{\value{page}} % save page count for appendix
+
+%% Starte Paginierung
+\cleardoublepage
+\pagenumbering{arabic}
+
+\include{kapitel1/einfuehrung}
+
+\include{kapitel2/grundlagen}
+
+\include{kapitel3/thema1}
+\include{kapitel3/thema2}
+\include{kapitel3/thema3}
+\include{kapitel3/thema4}
+
+\pagenumbering{Roman}
+\setcounter{page}{\value{prepend} + 1} % continue roman page count for appendix
+
+\listoffigures
+\lstlistoflistings
+\listoftables
+
+\nocite{*} % adds all references without citations to bibliography
+\bibliographystyle{apalike}
+\bibliography{citeulike}
+
+\include{appendix/anhang}
+
+\end{document}
